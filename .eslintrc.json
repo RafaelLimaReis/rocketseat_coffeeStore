@@ -1,0 +1,13 @@
+{
+  "extends": "@rocketseat/eslint-config/react",
+  "rules" : {
+    "prettier/prettier": ["error", {
+      "printWidth": 100,
+      "tabWidth": 4,
+      "singleQuote": true,
+      "arrowParens": "always",
+      "semi": false,
+      "endOfLine": "auto"
+    }]
+  }
+}
