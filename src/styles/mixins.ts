@@ -86,4 +86,8 @@ export const mixins = {
             font-weight: 400;
         `,
     },
+    limitContainer: css`
+        max-width: 72rem;
+        margin: 0 auto;
+    `,
 }

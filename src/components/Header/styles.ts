@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { mixins } from '../../styles/mixins'
 
 export const HeaderContainer = styled.header`
+    ${mixins.limitContainer}
+
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -41,5 +43,10 @@ export const HeaderContainer = styled.header`
                 padding: 0.125rem;
             }
         }
+    }
+
+    @media (max-width: 1160px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 `
