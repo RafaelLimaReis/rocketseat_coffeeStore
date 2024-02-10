@@ -1,14 +1,24 @@
 import { Minus, Plus } from 'phosphor-react'
 import { ContainerButton } from './styles'
 
-export function InputQuantity() {
+interface InterfaceInputQuantityProps {
+    onIncrementQuantity: () => void
+    onDecrementQuantity: () => void
+    quantity: number
+}
+
+export function InputQuantity({
+    onDecrementQuantity,
+    onIncrementQuantity,
+    quantity,
+}: InterfaceInputQuantityProps) {
     return (
         <ContainerButton>
-            <button>
+            <button onClick={onDecrementQuantity}>
                 <Minus size={14} />
             </button>
-            <span>0</span>
-            <button>
+            <span>{quantity}</span>
+            <button onClick={onIncrementQuantity}>
                 <Plus size={14} />
             </button>
         </ContainerButton>

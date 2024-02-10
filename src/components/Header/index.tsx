@@ -3,8 +3,12 @@ import { ShoppingCart } from 'phosphor-react'
 
 import { HeaderContainer } from './styles'
 import logo from '../../assets/logo.svg'
+import { CartContext } from '../../contexts/CartContext'
+import { useContext } from 'react'
 
 export function Header() {
+    const { cart } = useContext(CartContext)
+
     return (
         <HeaderContainer>
             <NavLink to="/" title="Home">
@@ -14,7 +18,13 @@ export function Header() {
                 {/* //TODO pensar em algo para exibir endereco */}
                 <NavLink to="/carrinho" title="Carrinho">
                     <ShoppingCart size={22} weight="fill" />
-                    {/* <span>1</span> */}
+                    {cart.length > 0 && (
+                        <span>
+                            {cart.reduce((acumulator, item) => {
+                                return acumulator + (item.quantity || 0)
+                            }, 0)}
+                        </span>
+                    )}
                 </NavLink>
             </nav>
         </HeaderContainer>
