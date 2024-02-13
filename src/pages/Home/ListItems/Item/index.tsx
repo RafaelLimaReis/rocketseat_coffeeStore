@@ -4,7 +4,7 @@ import { FooterContainer, ItemContainer, Tags } from './styles'
 import { useContext, useState } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
 
-export interface InterfaceCoffee {
+interface InterfaceCoffee {
     id: string
     title: string
     description: string
@@ -24,6 +24,7 @@ export function Item({ coffee }: InterfaceItemProps) {
 
     function handleAddItemCart() {
         addNewItemContext({ ...coffee, quantity })
+        setQuantity(1)
     }
 
     function incrementQuantity() {
@@ -31,6 +32,8 @@ export function Item({ coffee }: InterfaceItemProps) {
     }
 
     function decrementQuantity() {
+        if (quantity === 1) return
+
         setQuantity((state) => state - 1)
     }
 

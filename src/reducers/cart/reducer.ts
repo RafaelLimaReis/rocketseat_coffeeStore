@@ -1,6 +1,15 @@
 import { produce } from 'immer'
-import { InterfaceCoffee } from '../../pages/Home/ListItems/Item'
 import { ActionTypes } from './actions'
+
+export interface InterfaceCoffee {
+    id: string
+    title: string
+    description: string
+    tags: string[]
+    price: number
+    image: string
+    quantity: number
+}
 
 interface InterfaceCartState {
     cart: InterfaceCoffee[]
@@ -23,8 +32,35 @@ export function CartReducer(state: InterfaceCartState, action: any) {
                     draft.cart[findItem].quantity += action.payload.newItem.quantity
                 })
             }
-            return state
         }
+        case ActionTypes.INCREMENT_ITEM: {
+            return produce(state, (draft) => {
+                const product = draft.cart.find((item) => item.id === action.payload.id)
+
+                if (product?.id) {
+                    product.quantity += 1
+                }
+            })
+        }
+        case ActionTypes.DECREMENT_ITEM: {
+            return produce(state, (draft) => {
+                const product = draft.cart.find((item) => item.id === action.payload.id)
+
+                if (product?.id && product.quantity > 1) {
+                    product.quantity -= 1
+                }
+            })
+        }
+        case ActionTypes.DELETE_ITEM: {
+            return produce(state, (draft) => {
+                const productIndex = draft.cart.findIndex((item) => item.id === action.payload.id)
+
+                if (productIndex < 0) return
+
+                draft.cart.splice(productIndex, 1)
+            })
+        }
+        default:
+            return state
     }
-    return state
 }

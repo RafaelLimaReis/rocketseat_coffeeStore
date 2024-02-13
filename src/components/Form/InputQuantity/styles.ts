@@ -10,6 +10,7 @@ export const ContainerButton = styled.div`
     border-radius: 6px;
 
     padding: 0.5rem;
+    max-width: 4.5rem;
 
     button {
         background-color: transparent;
@@ -20,5 +21,9 @@ export const ContainerButton = styled.div`
         ${mixins.fonts.textM}
         color: ${(props) => props.theme.colors['base-title']};
         height: 1.0625rem;
+    }
+
+    svg {
+        color: ${(props) => props.theme.colors.purple};
     }
 `

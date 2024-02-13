@@ -16,7 +16,7 @@ export function Header() {
             </NavLink>
             <nav>
                 {/* //TODO pensar em algo para exibir endereco */}
-                <NavLink to="/carrinho" title="Carrinho">
+                <NavLink to={cart.length > 0 ? '/carrinho' : '/'} title="Carrinho">
                     <ShoppingCart size={22} weight="fill" />
                     {cart.length > 0 && (
                         <span>
