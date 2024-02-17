@@ -18,13 +18,7 @@ export function Header() {
                 {/* //TODO pensar em algo para exibir endereco */}
                 <NavLink to={cart.length > 0 ? '/carrinho' : '/'} title="Carrinho">
                     <ShoppingCart size={22} weight="fill" />
-                    {cart.length > 0 && (
-                        <span>
-                            {cart.reduce((acumulator, item) => {
-                                return acumulator + (item.quantity || 0)
-                            }, 0)}
-                        </span>
-                    )}
+                    {cart.length > 0 && <span>{cart.length}</span>}
                 </NavLink>
             </nav>
         </HeaderContainer>

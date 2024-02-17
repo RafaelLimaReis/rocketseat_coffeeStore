@@ -1,5 +1,6 @@
 import { produce } from 'immer'
 import { ActionTypes } from './actions'
+import { OrderInfo } from '../../pages/Cart'
 
 export interface InterfaceCoffee {
     id: string
@@ -11,8 +12,14 @@ export interface InterfaceCoffee {
     quantity: number
 }
 
+export interface OrderCart extends OrderInfo {
+    id: number
+    items: InterfaceCoffee[]
+}
+
 interface InterfaceCartState {
     cart: InterfaceCoffee[]
+    orders: OrderCart | null
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -58,6 +65,18 @@ export function CartReducer(state: InterfaceCartState, action: any) {
                 if (productIndex < 0) return
 
                 draft.cart.splice(productIndex, 1)
+            })
+        }
+        case ActionTypes.CHECKOUT: {
+            const newOrder = {
+                id: new Date().getTime(),
+                items: state.cart,
+                ...action.payload.data,
+            }
+            console.log(newOrder)
+            return produce(state, (draft) => {
+                draft.orders = newOrder
+                draft.cart = []
             })
         }
         default:

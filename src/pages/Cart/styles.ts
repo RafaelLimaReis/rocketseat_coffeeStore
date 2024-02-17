@@ -18,6 +18,60 @@ export const AddressContainer = styled.div`
     flex: 1;
 `
 
+export const AddressForm = styled.form`
+    display: grid;
+    grid-template-areas:
+        'cep . .'
+        'street street street'
+        'number fullAddress fullAddress'
+        'neighborhood city state';
+    grid-template-columns: 200px 1fr 60px;
+    grid-gap: 16px 12px;
+`
+
+export const CardContainer = styled.div`
+    margin-top: 0.9375rem;
+    padding: 2.5rem;
+    background: ${(props) => props.theme.colors['base-card']};
+    border-radius: 6px;
+
+    > div {
+        display: flex;
+        gap: 0.5rem;
+
+        > svg {
+            color: ${(props) => props.theme.colors['yellow-dark']};
+        }
+
+        h3 {
+            ${mixins.fonts.textM};
+            color: ${(props) => props.theme.colors['base-subtitle']};
+
+            margin-bottom: 2rem;
+
+            small {
+                display: block;
+                ${mixins.fonts.textS};
+                color: ${(props) => props.theme.colors['base-text']};
+            }
+        }
+    }
+    &:last-child {
+        div > svg {
+            color: ${(props) => props.theme.colors.purple};
+        }
+    }
+
+    label[role='alert'] {
+        ${mixins.fonts.textXS};
+        font-weight: normal;
+        color: red;
+
+        display: block;
+        margin-top: 0.25rem;
+    }
+`
+
 export const ProductsContainer = styled.div`
     max-width: 28rem;
 
@@ -28,7 +82,7 @@ export const ProductsContainer = styled.div`
         background-color: ${(props) => props.theme.colors['base-card']};
     }
 
-    a {
+    button[type='submit'] {
         display: block;
         width: 100%;
         background-color: ${(props) => props.theme.colors.yellow};

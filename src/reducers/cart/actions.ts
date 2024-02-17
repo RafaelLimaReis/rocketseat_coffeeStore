@@ -1,3 +1,4 @@
+import { OrderInfo } from '../../pages/Cart'
 import { InterfaceCoffee } from './reducer'
 
 export enum ActionTypes {
@@ -5,6 +6,7 @@ export enum ActionTypes {
     DECREMENT_ITEM = 'DECREMENT_ITEM',
     INCREMENT_ITEM = 'INCREMENT_ITEM',
     DELETE_ITEM = 'DELETE_ITEM',
+    CHECKOUT = 'CHECKOUT',
 }
 
 export function addNewItem(newItem: InterfaceCoffee) {
@@ -38,5 +40,12 @@ export function deleteItem(id: string) {
     return {
         type: ActionTypes.DELETE_ITEM,
         payload: { id },
+    }
+}
+
+export function checkout(data: OrderInfo) {
+    return {
+        type: ActionTypes.CHECKOUT,
+        payload: { data },
     }
 }
