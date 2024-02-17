@@ -35,11 +35,6 @@ export const InfoContainer = styled.div`
         color: ${(props) => props.theme.colors['base-subtitle']};
     }
 
-    @media (max-width: 1160px) {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
     @media (max-width: 1125px) {
         img {
             display: none;

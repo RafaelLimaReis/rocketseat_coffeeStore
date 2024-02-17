@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { z } from 'zod'
 import {
     AddressContainer,
@@ -50,6 +50,7 @@ export function Cart() {
         useContext(CartContext)
 
     const totalPriceProducts = cart.reduce((acc, item) => (acc = item.price * item.quantity), 0)
+    const navigate = useNavigate()
 
     const {
         register,
@@ -59,6 +60,12 @@ export function Cart() {
     } = useForm<TypeFormInputs>({
         resolver: zodResolver(newOrder),
     })
+
+    useEffect(() => {
+        if (cart.length <= 0) {
+            navigate('/')
+        }
+    }, [cart, navigate])
 
     function decrementQuantity(id: string) {
         decrementItemContext(id)
@@ -73,7 +80,6 @@ export function Cart() {
     }
 
     const selectedPaymentMethod = watch('paymentMethod')
-    const navigate = useNavigate()
 
     const handleOrderCheckout: SubmitHandler<TypeFormInputs> = (data) => {
         if (cart.length === 0) {
@@ -158,7 +164,7 @@ export function Cart() {
                             value="debit"
                         >
                             <Bank size={16} />
-                            <span>Cartão de crédito</span>
+                            <span>Cartão de débito</span>
                         </InputRadio>
                         <InputRadio
                             isSelected={selectedPaymentMethod === 'cash'}
@@ -166,7 +172,7 @@ export function Cart() {
                             value="cash"
                         >
                             <Money size={16} />
-                            <span>Cartão de crédito</span>
+                            <span>Dinheiro</span>
                         </InputRadio>
                     </div>
                     {errors.paymentMethod ? (

@@ -11,11 +11,6 @@ export const ListContainer = styled.section`
 
         margin-bottom: 3.375rem;
     }
-
-    @media (max-width: 1160px) {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
 `
 
 export const List = styled.div`

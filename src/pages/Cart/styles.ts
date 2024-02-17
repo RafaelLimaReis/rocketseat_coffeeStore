@@ -12,6 +12,10 @@ export const CartConteiner = styled.section`
         ${mixins.fonts.titleXS};
         color: ${(props) => props.theme.colors['base-subtitle']};
     }
+
+    @media (max-width: 865px) {
+        flex-direction: column-reverse;
+    }
 `
 
 export const AddressContainer = styled.div`
@@ -27,6 +31,28 @@ export const AddressForm = styled.form`
         'neighborhood city state';
     grid-template-columns: 200px 1fr 60px;
     grid-gap: 16px 12px;
+
+    @media (max-width: 990px) {
+        grid-template-areas:
+            'cep . .'
+            'street street street'
+            'number . .'
+            'fullAddress fullAddress fullAddress'
+            'neighborhood neighborhood neighborhood'
+            'city state state';
+    }
+
+    @media (max-width: 865px) {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            'cep'
+            'street'
+            'number'
+            'fullAddress'
+            'neighborhood'
+            'city'
+            'state';
+    }
 `
 
 export const CardContainer = styled.div`
@@ -38,6 +64,10 @@ export const CardContainer = styled.div`
     > div {
         display: flex;
         gap: 0.5rem;
+
+        @media (max-width: 1122px) {
+            flex-direction: column;
+        }
 
         > svg {
             color: ${(props) => props.theme.colors['yellow-dark']};
@@ -95,6 +125,12 @@ export const ProductsContainer = styled.div`
         color: ${(props) => props.theme.colors.white};
         ${mixins.fonts.buttonG};
     }
+
+    @media (max-width: 768px) {
+        > div {
+            padding: 1.5rem;
+        }
+    }
 `
 
 export const Product = styled.div`
@@ -124,6 +160,16 @@ export const Product = styled.div`
         margin-left: 1.875rem;
         ${mixins.fonts.textM};
         font-weight: bold;
+    }
+
+    @media (max-width: 465px) {
+        img {
+            display: none;
+        }
+    }
+
+    @media (max-width: 768px) {
+        gap: 1rem;
     }
 `
 

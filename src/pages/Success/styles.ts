@@ -23,6 +23,12 @@ export const ContainerDelivery = styled.div`
     gap: 6.375rem;
 
     margin-top: 2.5rem;
+
+    @media (max-width: 1070px) {
+        img {
+            display: none;
+        }
+    }
 `
 
 export const ContainerDetail = styled.div`

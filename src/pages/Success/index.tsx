@@ -2,8 +2,9 @@ import { Container, ContainerDelivery, ContainerDetail } from './styles'
 
 import carImg from '../../assets/images/delivery.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { CartContext } from '../../contexts/CartContext'
+import { useNavigate } from 'react-router-dom'
 
 export function Success() {
     const { orders } = useContext(CartContext)
@@ -13,6 +14,14 @@ export function Success() {
         cash: 'Dinheiro',
         undefined: '',
     }
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (orders === null) {
+            navigate('/')
+        }
+    }, [orders, navigate])
 
     return (
         <Container>

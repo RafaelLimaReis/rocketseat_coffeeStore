@@ -44,9 +44,4 @@ export const HeaderContainer = styled.header`
             }
         }
     }
-
-    @media (max-width: 1160px) {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
 `

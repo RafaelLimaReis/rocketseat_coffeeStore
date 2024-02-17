@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useReducer } from 'react'
+import { ReactNode, createContext, useEffect, useReducer } from 'react'
 import { CartReducer, InterfaceCoffee } from '../reducers/cart/reducer'
 import {
     addNewItem,
@@ -26,12 +26,31 @@ interface InterfaceCartContextType {
 export const CartContext = createContext({} as InterfaceCartContextType)
 
 export function CartContextProvider({ children }: InterfaceCartContextProviderProps) {
-    const [cartState, dispatch] = useReducer(CartReducer, {
-        cart: [],
-        orders: null,
-    })
+    const [cartState, dispatch] = useReducer(
+        CartReducer,
+        {
+            cart: [],
+            orders: null,
+        },
+        (cartState) => {
+            const stateCartStorage = localStorage.getItem('@coffee-delivery:cart-state-1.1.0')
+
+            if (stateCartStorage) {
+                return JSON.parse(stateCartStorage)
+            }
+
+            return cartState
+        },
+    )
 
     const { cart, orders } = cartState
+
+    useEffect(() => {
+        if (cartState) {
+            const stateJSON = JSON.stringify(cartState)
+            localStorage.setItem('@coffee-delivery:cart-state-1.1.0', stateJSON)
+        }
+    }, [cartState])
 
     function addNewItemContext(data: InterfaceCoffee) {
         dispatch(addNewItem(data))
