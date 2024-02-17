@@ -73,7 +73,6 @@ export function CartReducer(state: InterfaceCartState, action: any) {
                 items: state.cart,
                 ...action.payload.data,
             }
-            console.log(newOrder)
             return produce(state, (draft) => {
                 draft.orders = newOrder
                 draft.cart = []

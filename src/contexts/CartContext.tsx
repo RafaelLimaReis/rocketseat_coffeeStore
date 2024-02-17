@@ -15,6 +15,7 @@ interface InterfaceCartContextProviderProps {
 
 interface InterfaceCartContextType {
     cart: InterfaceCoffee[]
+    orders: OrderInfo | null
     addNewItemContext: (data: InterfaceCoffee) => void
     decrementItemContext: (id: string) => void
     incrementItemContext: (id: string) => void
@@ -30,7 +31,7 @@ export function CartContextProvider({ children }: InterfaceCartContextProviderPr
         orders: null,
     })
 
-    const { cart } = cartState
+    const { cart, orders } = cartState
 
     function addNewItemContext(data: InterfaceCoffee) {
         dispatch(addNewItem(data))
@@ -56,6 +57,7 @@ export function CartContextProvider({ children }: InterfaceCartContextProviderPr
         <CartContext.Provider
             value={{
                 cart,
+                orders,
                 addNewItemContext,
                 incrementItemContext,
                 decrementItemContext,
