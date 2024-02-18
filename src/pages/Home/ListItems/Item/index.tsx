@@ -1,7 +1,7 @@
-import { ShoppingCart } from 'phosphor-react'
+import { Check, ShoppingCart } from 'phosphor-react'
 import { InputQuantity } from '../../../../components/Form/InputQuantity'
 import { FooterContainer, ItemContainer, Tags } from './styles'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { CartContext } from '../../../../contexts/CartContext'
 
 interface InterfaceCoffee {
@@ -21,10 +21,12 @@ interface InterfaceItemProps {
 export function Item({ coffee }: InterfaceItemProps) {
     const { addNewItemContext } = useContext(CartContext)
     const [quantity, setQuantity] = useState(1)
+    const [isAddToCart, setIsAddToCart] = useState(false)
 
     function handleAddItemCart() {
         addNewItemContext({ ...coffee, quantity })
         setQuantity(1)
+        setIsAddToCart(true)
     }
 
     function incrementQuantity() {
@@ -36,6 +38,22 @@ export function Item({ coffee }: InterfaceItemProps) {
 
         setQuantity((state) => state - 1)
     }
+
+    useEffect(() => {
+        let timeout: number
+
+        if (isAddToCart) {
+            timeout = setTimeout(() => {
+                setIsAddToCart(false)
+            }, 1000)
+        }
+
+        return () => {
+            if (timeout) {
+                clearTimeout(timeout)
+            }
+        }
+    }, [isAddToCart])
 
     return (
         <ItemContainer>
@@ -63,8 +81,12 @@ export function Item({ coffee }: InterfaceItemProps) {
                         onDecrementQuantity={decrementQuantity}
                         quantity={quantity}
                     />
-                    <button onClick={handleAddItemCart}>
-                        <ShoppingCart size={22} weight="fill" />
+                    <button disabled={isAddToCart} onClick={handleAddItemCart}>
+                        {isAddToCart ? (
+                            <Check size={22} weight="fill" />
+                        ) : (
+                            <ShoppingCart size={22} weight="fill" />
+                        )}
                     </button>
                 </div>
             </FooterContainer>
